@@ -181,7 +181,7 @@ The web UI now shows a short error instead of raw HTML and retries once after ~2
 
 ### Free EOD cron (GitHub Actions)
 
-Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 10:35 UTC** (~4:05 PM IST) and calls all four `POST /analyze/...` routes. The API returns immediately (`status: running`); work runs in the background on Render.
+Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 11:30 UTC** (5:00 PM IST) and calls all four `POST /analyze/...` routes. The API returns immediately (`status: running`); work runs in the background on Render.
 
 1. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
 2. Add:

@@ -7,8 +7,8 @@ name: EOD analyze
 
 on:
   schedule:
-    # 10:35 UTC Mon–Fri ≈ 4:05 PM IST (after 3:30 PM close)
-    - cron: "35 10 * * 1-5"
+    # 11:30 UTC Mon–Fri = 5:00 PM IST (after 3:30 PM close + Yahoo EOD settle)
+    - cron: "30 11 * * 1-5"
   workflow_dispatch:
 
 jobs:
