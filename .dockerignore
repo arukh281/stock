@@ -1,0 +1,14 @@
+.git
+**/.git
+**/.venv
+**/node_modules
+**/.next
+**/.cache
+**/.pytest_cache
+**/__pycache__
+**/*.pyc
+sandbox/.env
+sandbox/web/.env.local
+.cursor
+*.md
+!sandbox/README.md

@@ -1,0 +1,60 @@
+# Render Blueprint — paper trading sandbox
+# Dashboard: New → Blueprint → connect this repo → apply render.yaml
+# After first deploy, set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY on paper-sandbox-api.
+
+services:
+  - type: web
+    name: paper-sandbox-api
+    runtime: docker
+    plan: free
+    dockerfilePath: sandbox/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ANALYZE_API_KEY
+        generateValue: true
+    buildFilter:
+      paths:
+        - sandbox/**
+        - 44ma/**
+        - KALI/**
+        - "financially free/**"
+      ignoredPaths:
+        - "**/.venv/**"
+        - "**/node_modules/**"
+        - "**/.next/**"
+        - "**/.cache/**"
+        - "**/.pytest_cache/**"
+        - "**/__pycache__/**"
+
+  - type: web
+    name: paper-sandbox-web
+    runtime: node
+    plan: free
+    rootDir: sandbox/web
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: API_URL
+        fromService:
+          type: web
+          name: paper-sandbox-api
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: ANALYZE_API_KEY
+        fromService:
+          type: web
+          name: paper-sandbox-api
+          envVarKey: ANALYZE_API_KEY
+    buildFilter:
+      paths:
+        - sandbox/web/**
+      ignoredPaths:
+        - sandbox/web/node_modules/**
+        - sandbox/web/.next/**

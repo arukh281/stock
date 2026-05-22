@@ -1,0 +1,17 @@
+# Secrets
+sandbox/.env
+sandbox/web/.env.local
+.env
+
+# Python
+**/.venv/
+**/__pycache__/
+**/*.pyc
+.pytest_cache/
+
+# Node / Next
+**/node_modules/
+**/.next/
+
+# Local caches
+**/.cache/
