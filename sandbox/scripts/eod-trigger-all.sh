@@ -6,13 +6,15 @@
 # - Keepalive pings during long runs (Render sleeps after ~15m idle)
 #
 # Env: API_URL, ANALYZE_API_KEY (required)
-# Optional: KEEPALIVE_INTERVAL_SEC POLL_INTERVAL_SEC RUN_TIMEOUT_SEC
+# Optional: EOD_SUMMARY_FILE, KEEPALIVE_INTERVAL_SEC, POLL_INTERVAL_SEC, RUN_TIMEOUT_SEC
 
 set -euo pipefail
 
 API_URL="${API_URL:?Set API_URL}"
 ANALYZE_API_KEY="${ANALYZE_API_KEY:?Set ANALYZE_API_KEY}"
 BASE="${API_URL%/}"
+SUMMARY_FILE="${EOD_SUMMARY_FILE:-eod-summary.json}"
+STARTED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 KEEPALIVE_INTERVAL_SEC="${KEEPALIVE_INTERVAL_SEC:-300}"
 POLL_INTERVAL_SEC="${POLL_INTERVAL_SEC:-30}"
@@ -33,6 +35,74 @@ ALGOS=(
 
 last_keepalive=0
 failures=0
+
+init_summary() {
+  jq -n \
+    --arg started_at "${STARTED_AT}" \
+    --arg api_url "${BASE}" \
+    '{started_at: $started_at, api_url: $api_url, failure_count: 0, runs: []}' \
+    > "${SUMMARY_FILE}"
+}
+
+append_run_json() {
+  local entry="$1"
+  local tmp
+  tmp=$(mktemp)
+  jq --argjson entry "${entry}" '.runs += [$entry]' "${SUMMARY_FILE}" > "${tmp}"
+  mv "${tmp}" "${SUMMARY_FILE}"
+}
+
+fetch_run_entry() {
+  local slug="$1"
+  local algo_id="$2"
+  local run_id="$3"
+  local wait_ok="${4:-true}"
+  local payload
+  if [[ -n "${run_id}" ]] && payload=$(api GET "${BASE}/runs/id/${run_id}" 2>/dev/null); then
+    echo "${payload}" | jq \
+      --arg slug "${slug}" \
+      --arg algo_id "${algo_id}" \
+      --argjson trigger_ok "${wait_ok}" \
+      '{
+        slug: $slug,
+        algo_id: $algo_id,
+        run_id: .id,
+        status: .status,
+        trigger_ok: $trigger_ok,
+        session_date: (.summary.session_date // null),
+        skipped: (.summary.skipped // null),
+        line_count: (.summary.line_count // null),
+        equity: (.summary.equity // null),
+        error_message: (.error_message // null),
+        sample_lines: ((.summary.lines // []) | .[:8])
+      }'
+  else
+    jq -n \
+      --arg slug "${slug}" \
+      --arg algo_id "${algo_id}" \
+      --arg run_id "${run_id}" \
+      --argjson trigger_ok "${wait_ok}" \
+      '{
+        slug: $slug,
+        algo_id: $algo_id,
+        run_id: ($run_id | if . == "" then null else . end),
+        status: "failed",
+        trigger_ok: $trigger_ok,
+        error: "Could not fetch run details from API"
+      }'
+  fi
+}
+
+finalize_summary() {
+  local tmp
+  tmp=$(mktemp)
+  jq \
+    --arg finished_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+    --argjson failure_count "${failures}" \
+    '.finished_at = $finished_at | .failure_count = $failure_count' \
+    "${SUMMARY_FILE}" > "${tmp}"
+  mv "${tmp}" "${SUMMARY_FILE}"
+}
 
 api() {
   local method="$1"
@@ -164,7 +234,7 @@ post_analyze() {
 run_algo() {
   local slug="$1"
   local algo_id="$2"
-  local run_id rc
+  local run_id rc wait_rc=0 entry
 
   echo ""
   echo "== ${slug} (${algo_id}) =="
@@ -176,19 +246,29 @@ run_algo() {
     run_id=$(find_running_run_id "${algo_id}")
     if [[ -z "${run_id}" ]]; then
       echo "  ERROR: 409 but no running run in /runs/${algo_id}" >&2
+      entry=$(jq -n --arg slug "${slug}" --arg algo_id "${algo_id}" \
+        '{slug: $slug, algo_id: $algo_id, status: "failed", trigger_ok: false, error: "409 but no running run"}')
+      append_run_json "${entry}"
       return 1
     fi
     echo "  joining existing run_id=${run_id}"
   elif (( rc != 0 )) || [[ -z "${run_id}" ]]; then
+    entry=$(jq -n --arg slug "${slug}" --arg algo_id "${algo_id}" \
+      '{slug: $slug, algo_id: $algo_id, status: "failed", trigger_ok: false, error: "POST /analyze failed"}')
+    append_run_json "${entry}"
     return 1
   fi
 
-  wait_for_run "${algo_id}" "${run_id}" "${slug}"
+  wait_for_run "${algo_id}" "${run_id}" "${slug}" || wait_rc=$?
+  entry=$(fetch_run_entry "${slug}" "${algo_id}" "${run_id}" "$( [[ ${wait_rc} -eq 0 ]] && echo true || echo false )")
+  append_run_json "${entry}"
+  return "${wait_rc}"
 }
 
 main() {
   command -v jq >/dev/null || { echo "jq is required" >&2; exit 1; }
 
+  init_summary
   wake_api
   last_keepalive=$(date +%s)
 
@@ -204,7 +284,9 @@ main() {
     maybe_keepalive
   done
 
+  finalize_summary
   echo ""
+  echo "Summary written to ${SUMMARY_FILE}"
   if (( failures > 0 )); then
     echo "EOD trigger finished with ${failures} failure(s)." >&2
     exit 1

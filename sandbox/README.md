@@ -193,6 +193,18 @@ Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 11:30 UTC** (
 
 3. Push the workflow file to `main`. Test manually: **Actions → EOD analyze → Run workflow**.
 
+### Gmail summary (optional)
+
+After each run, `sandbox/scripts/eod-send-mail.py` emails a per-algo report (status, session date, skipped, equity, log excerpt). Add **Actions secrets**:
+
+| Secret | Value |
+|--------|--------|
+| `GMAIL_USER` | Your Gmail address (sender) |
+| `GMAIL_APP_PASSWORD` | [Google App Password](https://myaccount.google.com/apppasswords) (16 chars; requires 2FA on the Google account) |
+| `MAIL_TO` | Recipient(s), comma-separated (can be the same as `GMAIL_USER`) |
+
+If `GMAIL_USER` / `GMAIL_APP_PASSWORD` are unset, the email step is skipped (analyze still runs).
+
 To change time, edit the `cron` line in the workflow ([cron syntax](https://docs.github.com/en/actions/writing-workflows/schedule-trigger); UTC only).
 
 **Other free options:** [cron-job.org](https://cron-job.org) (HTTP POST with header `X-API-Key`) — one job per algo or one job hitting a small wrapper URL.

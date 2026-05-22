@@ -1,10 +1,11 @@
 # Free EOD cron: GitHub Actions → Render API (after NSE cash close).
 # Uses sandbox/scripts/eod-trigger-all.sh for cold-start wake, sequential
 # algos, run completion polling, and keepalive during long background jobs.
+# Optional Gmail summary via secrets (see sandbox/README.md).
 #
 # Secrets (repo Settings → Secrets and variables → Actions):
-#   API_URL          e.g. https://paper-sandbox-api.onrender.com
-#   ANALYZE_API_KEY  same value as on paper-sandbox-api (Render → Environment)
+#   API_URL, ANALYZE_API_KEY — required
+#   GMAIL_USER, GMAIL_APP_PASSWORD, MAIL_TO — optional email
 
 name: EOD analyze
 
@@ -23,9 +24,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Sequential EOD analyze (Render-safe)
+        id: eod
         env:
           API_URL: ${{ secrets.API_URL }}
           ANALYZE_API_KEY: ${{ secrets.ANALYZE_API_KEY }}
+          EOD_SUMMARY_FILE: eod-summary.json
         run: |
           set -euo pipefail
           if [[ -z "${API_URL:-}" || -z "${ANALYZE_API_KEY:-}" ]]; then
@@ -33,4 +36,20 @@ jobs:
             exit 1
           fi
           chmod +x sandbox/scripts/eod-trigger-all.sh
-          sandbox/scripts/eod-trigger-all.sh
+          sandbox/scripts/eod-trigger-all.sh || {
+            ec=$?
+            if [[ ! -f eod-summary.json ]]; then
+              echo '{"runs":[],"failure_count":1,"note":"eod-trigger-all.sh exited before summary"}' > eod-summary.json
+            fi
+            exit $ec
+          }
+
+      - name: Send Gmail summary
+        if: always()
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          EOD_SUMMARY_FILE: eod-summary.json
+          WORKFLOW_STATUS: ${{ job.status }}
+        run: python3 sandbox/scripts/eod-send-mail.py
