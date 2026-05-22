@@ -8,8 +8,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-for sub in ("", "44ma", "hybrid_swing", "KALI/src", "financially free"):
+for sub in ("", "44ma", "hybrid_swing", "KALI/src", "financially free", "financially_free"):
     p = str(ROOT / sub) if sub else str(ROOT)
+    if sub.startswith("financially") and not Path(p).exists():
+        continue
     if p not in sys.path:
         sys.path.insert(0, p)
 

@@ -13,9 +13,11 @@ def setup_paths() -> None:
         p = ROOT / name
         if p.exists() and str(p) not in sys.path:
             sys.path.insert(0, str(p))
-    ff = ROOT / "financially free"
-    if ff.exists() and str(ff) not in sys.path:
-        sys.path.insert(0, str(ff))
+    for ff_name in ("financially free", "financially_free"):
+        ff = ROOT / ff_name
+        if ff.exists() and str(ff) not in sys.path:
+            sys.path.insert(0, str(ff))
+            break
     kali_src = ROOT / "KALI" / "src"
     if kali_src.exists() and str(kali_src) not in sys.path:
         sys.path.insert(0, str(kali_src))
