@@ -1,0 +1,23 @@
+{
+  "universe_top_n": 100,
+  "universe_master_pool": 0,
+  "universe_cache_dir": ".cache/universe",
+  "universe_history_start": "2018-01-01",
+  "universe_fetch_sleep_sec": 0.2,
+  "sma_period": 44,
+  "sma_rising_lookback": 5,
+  "sma_monotone_days": 0,
+  "sma_slope_min_pct": 0.008,
+  "require_close_above_prev": false,
+  "touch_above_pct": 0.005,
+  "touch_below_pct": 0.012,
+  "entry_buffer_pct": 0.0005,
+  "stop_buffer_pct": 0.0005,
+  "breakout_hold_days": 4,
+  "risk_reward": 3.0,
+  "starting_cash_inr": 20000,
+  "risk_per_trade_inr": 100,
+  "commission_pct": 0.0005,
+  "slippage_pct": 0.0005,
+  "max_open_positions": 10
+}

@@ -1,0 +1,326 @@
+==================================================
+Portfolio optimizer — midcap150 (maximize return)
+==================================================
+Fetching macro index data for NIFTYMIDCAP150.NS...
+Downloading 161 stocks (2017-02-01 → 2026-05-01)...
+[                       0%                       ][                       0%                       ][*                      2%                       ]  3 of 161 completed[*                      2%                       ]  4 of 161 completed[*                      3%                       ]  5 of 161 completed[**                     4%                       ]  6 of 161 completed[**                     4%                       ]  7 of 161 completed[**                     5%                       ]  8 of 161 completed[***                    6%                       ]  9 of 161 completed[***                    6%                       ]  10 of 161 completed[***                    7%                       ]  11 of 161 completed[***                    7%                       ]  12 of 161 completed[****                   8%                       ]  13 of 161 completed[****                   9%                       ]  14 of 161 completed[****                   9%                       ]  15 of 161 completed[*****                 10%                       ]  16 of 161 completed[*****                 11%                       ]  17 of 161 completed[*****                 11%                       ]  18 of 161 completed[******                12%                       ]  19 of 161 completed[******                12%                       ]  20 of 161 completed[******                13%                       ]  21 of 161 completed[*******               14%                       ]  22 of 161 completed[*******               14%                       ]  23 of 161 completed[*******               15%                       ]  24 of 161 completed[********              16%                       ]  25 of 161 completed[********              16%                       ]  26 of 161 completed[********              17%                       ]  27 of 161 completed[********              17%                       ]  28 of 161 completed[*********             18%                       ]  29 of 161 completed[*********             19%                       ]  30 of 161 completed[*********             19%                       ]  31 of 161 completed[**********            20%                       ]  32 of 161 completed[**********            20%                       ]  33 of 161 completed[**********            21%                       ]  34 of 161 completed[***********           22%                       ]  35 of 161 completed[***********           22%                       ]  36 of 161 completed[***********           23%                       ]  37 of 161 completed[************          24%                       ]  38 of 161 completed[************          24%                       ]  39 of 161 completed[************          25%                       ]  40 of 161 completed[************          25%                       ]  41 of 161 completed[************          26%                       ]  42 of 161 completed[*************         27%                       ]  43 of 161 completed[*************         27%                       ]  44 of 161 completed[*************         28%                       ]  45 of 161 completed[**************        29%                       ]  46 of 161 completed[**************        29%                       ]  47 of 161 completed[**************        30%                       ]  48 of 161 completed[**************        30%                       ]  49 of 161 completed[***************       31%                       ]  50 of 161 completed[***************       32%                       ]  51 of 161 completed[***************       32%                       ]  52 of 161 completed[***************       32%                       ]  52 of 161 completed[****************      34%                       ]  54 of 161 completed[****************      34%                       ]  55 of 161 completed[*****************     35%                       ]  56 of 161 completed[*****************     35%                       ]  57 of 161 completed[*****************     36%                       ]  58 of 161 completed[******************    37%                       ]  59 of 161 completed[******************    37%                       ]  60 of 161 completed[******************    38%                       ]  61 of 161 completed[*******************   39%                       ]  62 of 161 completed[*******************   39%                       ]  63 of 161 completed[*******************   40%                       ]  64 of 161 completed[*******************   40%                       ]  65 of 161 completed[********************  41%                       ]  66 of 161 completed[********************  42%                       ]  67 of 161 completed[********************  42%                       ]  68 of 161 completed[********************* 43%                       ]  69 of 161 completed[********************* 43%                       ]  70 of 161 completed[********************* 44%                       ]  71 of 161 completed[**********************45%                       ]  72 of 161 completed[**********************45%                       ]  73 of 161 completed[**********************46%                       ]  74 of 161 completed[**********************47%                       ]  75 of 161 completed[**********************47%                       ]  76 of 161 completed[**********************48%                       ]  77 of 161 completed[**********************48%                       ]  78 of 161 completed[**********************49%                       ]  79 of 161 completed[**********************50%                       ]  80 of 161 completed[**********************50%                       ]  81 of 161 completed[**********************51%                       ]  82 of 161 completed[**********************52%                       ]  83 of 161 completed[**********************52%                       ]  84 of 161 completed[**********************53%                       ]  85 of 161 completed[**********************53%                       ]  86 of 161 completed[**********************54%*                      ]  87 of 161 completed[**********************55%*                      ]  88 of 161 completed[**********************55%*                      ]  89 of 161 completed[**********************56%**                     ]  90 of 161 completed[**********************57%**                     ]  91 of 161 completed[**********************57%**                     ]  92 of 161 completed[**********************58%***                    ]  93 of 161 completed[**********************58%***                    ]  94 of 161 completed[**********************59%***                    ]  95 of 161 completed[**********************60%****                   ]  96 of 161 completed[**********************60%****                   ]  97 of 161 completed[**********************61%****                   ]  98 of 161 completed[**********************61%****                   ]  99 of 161 completed[**********************62%*****                  ]  100 of 161 completed[**********************63%*****                  ]  101 of 161 completed[**********************63%*****                  ]  102 of 161 completed[**********************64%******                 ]  103 of 161 completed[**********************65%******                 ]  104 of 161 completed[**********************65%******                 ]  105 of 161 completed[**********************66%*******                ]  106 of 161 completed[**********************66%*******                ]  107 of 161 completed[**********************67%*******                ]  108 of 161 completed[**********************68%********               ]  109 of 161 completed[**********************68%********               ]  110 of 161 completed[**********************69%********               ]  111 of 161 completed[**********************70%*********              ]  112 of 161 completed[**********************70%*********              ]  113 of 161 completed[**********************71%*********              ]  114 of 161 completed[**********************71%*********              ]  115 of 161 completed[**********************72%**********             ]  116 of 161 completed[**********************73%**********             ]  117 of 161 completed[**********************73%**********             ]  118 of 161 completed[**********************74%***********            ]  119 of 161 completed[**********************75%***********            ]  120 of 161 completed[**********************75%***********            ]  121 of 161 completed[**********************76%***********            ]  122 of 161 completed[**********************76%***********            ]  123 of 161 completed[**********************77%************           ]  124 of 161 completed[**********************78%************           ]  125 of 161 completed[**********************78%************           ]  126 of 161 completed[**********************79%*************          ]  127 of 161 completed[**********************80%*************          ]  128 of 161 completed[**********************80%*************          ]  129 of 161 completed[**********************81%**************         ]  130 of 161 completed[**********************81%**************         ]  131 of 161 completed[**********************82%**************         ]  132 of 161 completed[**********************83%***************        ]  133 of 161 completed[**********************83%***************        ]  134 of 161 completed[**********************84%***************        ]  135 of 161 completed[**********************84%***************        ]  136 of 161 completed[**********************85%****************       ]  137 of 161 completed[**********************86%****************       ]  138 of 161 completed[**********************86%****************       ]  139 of 161 completed[**********************87%*****************      ]  140 of 161 completed[**********************88%*****************      ]  141 of 161 completed[**********************88%*****************      ]  142 of 161 completed[**********************89%******************     ]  143 of 161 completed[**********************89%******************     ]  144 of 161 completed[**********************90%******************     ]  145 of 161 completed[**********************91%*******************    ]  146 of 161 completed[**********************91%*******************    ]  147 of 161 completed[**********************92%*******************    ]  148 of 161 completed[**********************93%********************   ]  149 of 161 completed[**********************93%********************   ]  150 of 161 completed[**********************94%********************   ]  151 of 161 completed[**********************94%********************   ]  152 of 161 completed[**********************95%*********************  ]  153 of 161 completed[**********************96%*********************  ]  154 of 161 completed[**********************96%*********************  ]  155 of 161 completed[**********************97%********************** ]  156 of 161 completed[**********************98%********************** ]  157 of 161 completed[**********************98%********************** ]  158 of 161 completed[**********************99%***********************]  159 of 161 completed[**********************99%***********************]  160 of 161 completed[*********************100%***********************]  161 of 161 completed
+Loaded 155 / 161 tickers.
+Testing 288 parameter combinations...
+  [1/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [2/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [3/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [4/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [5/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [6/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [7/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [8/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [9/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [10/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [11/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [12/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [13/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [14/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [15/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [16/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [17/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [18/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [19/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [20/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [21/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [22/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [23/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [24/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [25/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [26/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [27/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [28/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [29/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [30/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [31/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [32/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [33/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [34/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [35/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [36/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [37/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [38/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [39/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [40/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [41/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [42/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [43/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [44/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [45/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [46/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [47/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [48/288] {'max_roc': 45, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [49/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [50/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [51/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [52/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [53/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [54/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [55/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [56/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [57/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [58/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [59/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [60/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [61/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [62/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [63/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [64/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [65/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [66/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [67/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [68/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [69/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [70/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [71/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [72/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [73/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [74/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [75/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [76/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [77/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [78/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [79/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [80/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [81/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [82/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [83/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [84/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [85/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [86/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [87/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [88/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [89/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [90/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [91/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [92/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [93/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [94/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [95/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [96/288] {'max_roc': 45, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [97/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [98/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [99/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [100/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [101/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [102/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [103/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [104/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [105/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [106/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [107/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [108/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [109/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [110/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [111/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [112/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [113/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [114/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [115/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [116/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [117/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [118/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [119/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [120/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [121/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [122/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [123/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [124/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [125/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [126/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [127/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [128/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [129/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [130/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [131/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [132/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [133/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [134/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [135/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [136/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [137/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [138/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [139/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [140/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [141/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [142/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [143/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [144/288] {'max_roc': 75, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [145/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [146/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [147/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [148/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [149/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [150/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [151/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [152/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [153/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [154/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [155/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [156/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [157/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [158/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [159/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [160/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [161/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [162/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [163/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [164/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [165/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [166/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [167/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [168/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [169/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [170/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [171/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [172/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [173/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [174/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [175/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [176/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [177/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [178/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [179/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [180/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [181/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [182/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [183/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [184/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [185/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [186/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [187/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [188/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [189/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [190/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [191/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [192/288] {'max_roc': 75, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [193/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [194/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [195/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [196/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [197/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [198/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [199/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [200/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [201/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [202/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [203/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [204/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [205/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [206/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [207/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [208/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [209/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [210/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [211/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [212/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [213/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [214/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [215/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [216/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [217/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [218/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [219/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [220/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [221/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [222/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [223/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [224/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [225/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [226/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [227/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [228/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [229/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [230/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [231/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [232/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [233/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [234/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [235/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [236/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [237/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [238/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [239/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [240/288] {'max_roc': 100, 'exit_confirm_days': 1, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [241/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [242/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [243/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [244/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [245/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [246/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [247/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [248/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [249/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [250/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [251/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [252/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [253/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [254/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [255/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [256/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [257/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [258/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [259/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [260/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [261/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [262/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [263/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [264/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 0, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [265/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [266/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [267/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [268/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [269/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [270/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [271/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [272/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [273/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [274/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [275/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [276/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 5, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [277/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [278/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [279/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [280/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [281/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [282/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.0, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+  [283/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.2}
+  [284/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 10, 'rs_top_pct': 0.3}
+  [285/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.2}
+  [286/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 20, 'rs_top_pct': 0.3}
+  [287/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.2}
+  [288/288] {'max_roc': 100, 'exit_confirm_days': 2, 'cooldown_days': 10, 'max_positions': 10, 'min_volume_ratio': 1.2, 'stop_lookback': 30, 'rs_top_pct': 0.3}
+
+Top 10 parameter sets:
+ max_roc  exit_confirm_days  cooldown_days  max_positions  min_volume_ratio  stop_lookback  rs_top_pct  strategy_return_pct  max_drawdown_pct  nifty_return_pct  alpha_vs_nifty_pct  num_trades_closed  win_rate_pct
+      75                  2              0              5               1.0             20         0.2               169.66            -14.58            250.74              -81.08                145          51.0
+      75                  2              0              5               1.2             30         0.2               169.66            -14.58            250.74              -81.08                145          51.0
+      75                  2              0              5               1.2             20         0.2               169.66            -14.58            250.74              -81.08                145          51.0
+      75                  2              0              5               1.0             30         0.2               169.66            -14.58            250.74              -81.08                145          51.0
+      75                  2              0              5               1.0             10         0.2               169.47            -14.46            250.74              -81.27                145          51.0
+      75                  2              0              5               1.2             10         0.2               169.47            -14.46            250.74              -81.27                145          51.0
+      75                  2             10              5               1.0             20         0.2               163.64            -14.58            250.74              -87.10                147          50.3
+      75                  2             10              5               1.0             30         0.2               163.64            -14.58            250.74              -87.10                147          50.3
+      75                  2             10              5               1.2             20         0.2               163.64            -14.58            250.74              -87.10                147          50.3
+      75                  2             10              5               1.2             30         0.2               163.64            -14.58            250.74              -87.10                147          50.3
+
+Best config:
+  max_roc: 75.0
+  exit_confirm_days: 2.0
+  cooldown_days: 0.0
+  max_positions: 5.0
+  min_volume_ratio: 1.0
+  stop_lookback: 20.0
+  rs_top_pct: 0.2
+  strategy_return_pct: 169.66
+  max_drawdown_pct: -14.58
+  nifty_return_pct: 250.74
+  alpha_vs_nifty_pct: -81.08
+  num_trades_closed: 145.0
+  win_rate_pct: 51.0
+
+Saved all runs to portfolio_optimization_results_midcap.csv

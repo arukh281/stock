@@ -1,0 +1,85 @@
+data:
+  cache_dir: data/cache
+  ohlcv_subdir: ohlcv
+  screener_subdir: screener
+  pit_membership_file: data/manual/pit_nifty150.csv
+
+universe:
+  roe_above_sector_median: true
+  debt_to_equity_max: 0.5
+  eps_cagr_5y_min: 12.0
+  piotroski_min: 7
+  fcf_yield_min: 4.0
+  promoter_holding_min: 40.0
+  rebalance_months: [1, 4, 7, 10]
+
+features:
+  atr_period: 14
+  hurst_window: 60
+  hurst_scales: [10, 14, 20, 30, 40, 60]
+  ou_window: 60
+  yz_window: 20
+  hmm_train_window: 252
+  hmm_retrain_step: 20
+  min_history_bars: 120
+  entropy_window: 60
+  chaos_enabled: true
+  lyapunov_window: 60
+  dfa_scales: [10, 14, 20, 30, 40, 60]
+
+regime:
+  persistence_bars: 2
+  bull_threshold: 0.6
+  bear_threshold: -0.6
+  sideways_band: 0.5
+  weights:
+    hurst: 0.20
+    vol_ratio: 0.10
+    cms: 0.20
+    obv_slope: 0.15
+    ofi: 0.10
+    kalman_velocity: 0.10
+    entropy: 0.10
+    volume_z: 0.05
+
+signals:
+  cms_entry_min: 0.5
+  volume_z_entry_min: 1.0
+  confluence_min: 2
+  weekly_hurst_allow: [TRENDING, INDETERMINATE]
+  stoch_rsi_max: 80
+  atr_stop_mult: 3
+  atr_target_mult: 6
+  swing_max_days: 90
+  positional_max_days: 90
+
+risk:
+  risk_per_trade_pct: 0.01
+  max_positions_bull: 10
+  max_positions_sideways: 2
+  pyramid_atr_mult: 1.5
+  pyramid_size_frac: 0.5
+  correlation_threshold: 0.70
+  correlation_penalty: 0.30
+  circuit_breaker_dd: 1.0
+  circuit_resume_dd: 1.0
+  kelly_bootstrap:
+    BULL_TREND: 0.06
+    SIDEWAYS: 0.03
+    BEAR_TREND: 0.0
+    DISTRIBUTION: 0.0
+  kelly_min_trades: 30
+  kelly_winrate_ci_floor: 0.35
+
+backtest:
+  initial_capital: 1000000
+  circuit_limit_default: 0.19
+  slippage_amihud_scale: 1.0
+  rf_rate: 0.06
+
+screener:
+  base_url: https://www.screener.in
+  rate_limit_seconds: 1.0
+  max_retries: 3
+  sector_peer_limit: 12
+  sector_median_roe_default: 12.0

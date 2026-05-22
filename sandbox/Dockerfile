@@ -9,8 +9,8 @@ RUN pip install --no-cache-dir -r /app/sandbox/requirements.txt
 
 COPY sandbox /app/sandbox
 COPY 44ma /app/44ma
-# Repo dir has a space; Docker paths cannot — copy to financially_free
-COPY "financially free" /app/financially_free
+# Repo dir has a space — use JSON COPY form (shell-style quotes break BuildKit)
+COPY ["financially free", "/app/financially_free"]
 COPY KALI /app/KALI
 
 RUN pip install --no-cache-dir -r /app/44ma/requirements.txt \
