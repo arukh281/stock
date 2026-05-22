@@ -14,34 +14,19 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
-      - name: Wake API and trigger all algos
+      - name: Trigger all algos
         env:
           API_URL: ${{ secrets.API_URL }}
           ANALYZE_API_KEY: ${{ secrets.ANALYZE_API_KEY }}
         run: |
           set -euo pipefail
           if [[ -z "${API_URL:-}" || -z "${ANALYZE_API_KEY:-}" ]]; then
-            echo "Add API_URL and ANALYZE_API_KEY in GitHub → Settings → Secrets → Actions." >&2
+            echo "Add API_URL and ANALYZE_API_KEY in GitHub repo secrets." >&2
             exit 1
           fi
           base="${API_URL%/}"
-
-          echo "Waking ${base} (free tier cold start)..."
-          for i in $(seq 1 12); do
-            if curl -fsS --max-time 30 "${base}/health" >/dev/null; then
-              echo "API healthy"
-              break
-            fi
-            if [[ "$i" -eq 12 ]]; then
-              echo "API did not respond to /health in time" >&2
-              exit 1
-            fi
-            echo "Retry ${i}/12 in 15s..."
-            sleep 15
-          done
-
           algos=(
             44ma
             44ma-stacked-2ma
@@ -57,4 +42,3 @@ jobs:
               "${base}/analyze/${slug}"
             echo
           done
-          echo "All analyze jobs queued on API (status: running). Check dashboard Activity / Render logs."
