@@ -1,0 +1,60 @@
+# Free EOD cron: GitHub Actions → Render API (after NSE cash close).
+# Secrets (repo Settings → Secrets and variables → Actions):
+#   API_URL          e.g. https://paper-sandbox-api.onrender.com
+#   ANALYZE_API_KEY  same value as on paper-sandbox-api (Render → Environment)
+
+name: EOD analyze
+
+on:
+  schedule:
+    # 10:35 UTC Mon–Fri ≈ 4:05 PM IST (after 3:30 PM close)
+    - cron: "35 10 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Wake API and trigger all algos
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          ANALYZE_API_KEY: ${{ secrets.ANALYZE_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${API_URL:-}" || -z "${ANALYZE_API_KEY:-}" ]]; then
+            echo "Add API_URL and ANALYZE_API_KEY in GitHub → Settings → Secrets → Actions." >&2
+            exit 1
+          fi
+          base="${API_URL%/}"
+
+          echo "Waking ${base} (free tier cold start)..."
+          for i in $(seq 1 12); do
+            if curl -fsS --max-time 30 "${base}/health" >/dev/null; then
+              echo "API healthy"
+              break
+            fi
+            if [[ "$i" -eq 12 ]]; then
+              echo "API did not respond to /health in time" >&2
+              exit 1
+            fi
+            echo "Retry ${i}/12 in 15s..."
+            sleep 15
+          done
+
+          algos=(
+            44ma
+            44ma-stacked-2ma
+            financially-free
+            kali
+          )
+          for slug in "${algos[@]}"; do
+            echo "POST /analyze/${slug}"
+            curl -fsS -X POST \
+              -H "X-API-Key: ${ANALYZE_API_KEY}" \
+              -H "Content-Type: application/json" \
+              --max-time 120 \
+              "${base}/analyze/${slug}"
+            echo
+          done
+          echo "All analyze jobs queued on API (status: running). Check dashboard Activity / Render logs."
