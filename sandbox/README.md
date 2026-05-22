@@ -156,17 +156,46 @@ curl https://paper-sandbox-api.onrender.com/health
 
 Dashboard should load portfolio data from Supabase via the API.
 
+### Dashboard shows ₹0 and “Bad Gateway” / HTML in algo cards
+
+That HTML is Render’s **502** page: the **web** app called `paper-sandbox-api`, but no healthy API instance answered.
+
+1. **Render → `paper-sandbox-api` → Logs** — look for crash/OOM during startup or missing env vars.
+2. **`curl https://paper-sandbox-api.onrender.com/health`** — must return `{"status":"ok"}` within ~60s (free tier cold start). If it times out, the API never came up; redeploy or upgrade instance RAM.
+3. **Environment** on the API service: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `ANALYZE_API_KEY` must be set. On the web service, `API_URL` must be the API’s `https://…onrender.com` URL and **`ANALYZE_API_KEY` must match** the API (Blueprint wires this; if you edited keys manually, sync both).
+4. After fixing the API, **redeploy `paper-sandbox-web`** so it picks up env changes, then hard-refresh the dashboard.
+
+The web UI now shows a short error instead of raw HTML and retries once after ~20s when the API is waking from sleep.
+
 ### Free tier caveats
 
 - Services **sleep after ~15 minutes** of no traffic; first request after idle can take 30–60s.
 - API free tier is **512MB RAM**. Heavy `POST /analyze/kali` runs may OOM; upgrade the API instance in Render (**Settings → Instance type**) if needed.
-- For daily EOD analyze after market close, use [Render Cron Jobs](https://render.com/docs/cronjobs) or GitHub Actions calling `POST /analyze/...` with `X-API-Key`.
+- For daily EOD analyze after market close, use the free **GitHub Actions** workflow (see below). Render Cron Jobs are not on the free tier.
 
 ### Manual deploy (without Blueprint)
 
 **API:** Web Service → Docker → Dockerfile path `sandbox/Dockerfile`, context `.`, env vars as in the table below.
 
 **Web:** Web Service → Node → Root directory `sandbox/web`, Build `npm ci && npm run build`, Start `npm start`, env `API_URL` = API’s `https://…onrender.com`, same `ANALYZE_API_KEY`.
+
+### Free EOD cron (GitHub Actions)
+
+Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 10:35 UTC** (~4:05 PM IST) and calls all four `POST /analyze/...` routes. The API returns immediately (`status: running`); work runs in the background on Render.
+
+1. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
+2. Add:
+
+| Secret | Value |
+|--------|--------|
+| `API_URL` | `https://paper-sandbox-api.onrender.com` (your API URL, no trailing slash) |
+| `ANALYZE_API_KEY` | Copy from Render → `paper-sandbox-api` → **Environment** |
+
+3. Push the workflow file to `main`. Test manually: **Actions → EOD analyze → Run workflow**.
+
+To change time, edit the `cron` line in the workflow ([cron syntax](https://docs.github.com/en/actions/writing-workflows/schedule-trigger); UTC only).
+
+**Other free options:** [cron-job.org](https://cron-job.org) (HTTP POST with header `X-API-Key`) — one job per algo or one job hitting a small wrapper URL.
 
 ### Alternative (Fly + Vercel)
 

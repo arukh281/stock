@@ -9,12 +9,6 @@ from typing import Any, Callable, Dict, List, Optional
 from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from sandbox.adapters import (
-    run_financially_free_analyze,
-    run_kali_analyze,
-    run_ma44_analyze,
-)
-from sandbox.gates.registry import gate_breakdown, list_algos, run_compare
 from sandbox.store.supabase_store import SupabaseLedgerStore
 
 app = FastAPI(title="Paper Trading Sandbox", version="1.0.0")
@@ -45,6 +39,8 @@ def health() -> Dict[str, str]:
 
 @app.get("/gates", dependencies=[Depends(verify_api_key)])
 def list_gate_algos() -> Dict[str, Any]:
+    from sandbox.gates.registry import list_algos
+
     return {"algos": list_algos()}
 
 
@@ -55,6 +51,8 @@ def get_gate_breakdown(
 ) -> Dict[str, Any]:
     if algo_id not in ALGO_IDS:
         raise HTTPException(404, f"Unknown algo_id: {algo_id}")
+    from sandbox.gates.registry import gate_breakdown
+
     result = gate_breakdown(algo_id, symbol)
     if "error" in result and "algos" in result:
         raise HTTPException(404, result["error"])
@@ -72,6 +70,8 @@ def get_gate_compare(
     kwargs: Dict[str, Any] = {"start": start}
     if end:
         kwargs["end"] = end
+    from sandbox.gates.registry import run_compare
+
     return run_compare(algo_id, **kwargs)
 
 
@@ -111,6 +111,8 @@ def _schedule_ma44_analyze(algo_id: str, background_tasks: BackgroundTasks) -> D
     run_id = store.start_run()
 
     def job():
+        from sandbox.adapters.ma44_adapter import run_ma44_analyze
+
         return run_ma44_analyze(algo_id)
 
     background_tasks.add_task(_run_job, algo_id, job, run_id)
@@ -131,7 +133,12 @@ def analyze_44ma_stacked_2ma(background_tasks: BackgroundTasks) -> Dict[str, Any
 def analyze_financially_free(background_tasks: BackgroundTasks) -> Dict[str, Any]:
     store = _guard_running("financially_free")
     run_id = store.start_run()
-    background_tasks.add_task(_run_job, "financially_free", run_financially_free_analyze, run_id)
+    def job():
+        from sandbox.adapters.financially_free_adapter import run_financially_free_analyze
+
+        return run_financially_free_analyze()
+
+    background_tasks.add_task(_run_job, "financially_free", job, run_id)
     return {"run_id": run_id, "algo_id": "financially_free", "status": "running"}
 
 
@@ -145,6 +152,8 @@ def analyze_kali(
     run_id = store.start_run()
 
     def job():
+        from sandbox.adapters.kali_adapter import run_kali_analyze
+
         return run_kali_analyze(
             skip_fundamentals=skip_fundamentals,
             force_screener=force_screener,

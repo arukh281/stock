@@ -9,9 +9,8 @@ export async function GET(
     const data = await apiFetch(`/portfolio/${params.algoId}`);
     return NextResponse.json(data);
   } catch (e) {
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : "Failed" },
-      { status: 500 }
-    );
+    const message = e instanceof Error ? e.message : "Failed";
+    const status = /unavailable|Cannot reach API/i.test(message) ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
