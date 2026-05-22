@@ -1,4 +1,7 @@
 # Free EOD cron: GitHub Actions → Render API (after NSE cash close).
+# Uses sandbox/scripts/eod-trigger-all.sh for cold-start wake, sequential
+# algos, run completion polling, and keepalive during long background jobs.
+#
 # Secrets (repo Settings → Secrets and variables → Actions):
 #   API_URL          e.g. https://paper-sandbox-api.onrender.com
 #   ANALYZE_API_KEY  same value as on paper-sandbox-api (Render → Environment)
@@ -14,9 +17,12 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 180
     steps:
-      - name: Trigger all algos
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sequential EOD analyze (Render-safe)
         env:
           API_URL: ${{ secrets.API_URL }}
           ANALYZE_API_KEY: ${{ secrets.ANALYZE_API_KEY }}
@@ -26,19 +32,5 @@ jobs:
             echo "Add API_URL and ANALYZE_API_KEY in GitHub repo secrets." >&2
             exit 1
           fi
-          base="${API_URL%/}"
-          algos=(
-            44ma
-            44ma-stacked-2ma
-            financially-free
-            kali
-          )
-          for slug in "${algos[@]}"; do
-            echo "POST /analyze/${slug}"
-            curl -fsS -X POST \
-              -H "X-API-Key: ${ANALYZE_API_KEY}" \
-              -H "Content-Type: application/json" \
-              --max-time 120 \
-              "${base}/analyze/${slug}"
-            echo
-          done
+          chmod +x sandbox/scripts/eod-trigger-all.sh
+          sandbox/scripts/eod-trigger-all.sh

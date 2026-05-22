@@ -181,7 +181,7 @@ The web UI now shows a short error instead of raw HTML and retries once after ~2
 
 ### Free EOD cron (GitHub Actions)
 
-Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 11:30 UTC** (5:00 PM IST) and calls all four `POST /analyze/...` routes. The API returns immediately (`status: running`); work runs in the background on Render.
+Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 11:30 UTC** (5:00 PM IST). Script `sandbox/scripts/eod-trigger-all.sh` wakes the API (`/health` retries), runs **one algo at a time**, polls `/runs/id/{run_id}` until each job finishes, and pings `/health` every 5 minutes during long runs so Render free tier does not spin down mid-analyze.
 
 1. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
 2. Add:
