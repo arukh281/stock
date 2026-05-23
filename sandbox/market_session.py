@@ -1,9 +1,9 @@
 """
 NSE cash EOD session helpers (IST).
 
-Before 15:35 IST the current session's daily candle is not complete; analyze the
-previous trading day. After close, analyze today. Skip if that session was already
-snapshotted.
+Before EOD_ANALYZE_AFTER_IST the latest *completed* session is the prior trading day.
+After that time (aligned with GitHub cron ~17:30 IST), target today's bar.
+Skip only when an equity snapshot already exists for that target session date.
 """
 
 from __future__ import annotations
@@ -16,8 +16,10 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 
 IST = ZoneInfo("Asia/Kolkata")
-# NSE cash close ~15:30; allow a few minutes for EOD bar to settle.
-MARKET_CLOSE_IST = time(15, 35)
+# NSE cash close ~15:30 IST.
+NSE_CASH_CLOSE_IST = time(15, 30)
+# When cron / manual EOD should target today's bar (after Yahoo has settled).
+EOD_ANALYZE_AFTER_IST = time(17, 30)
 
 
 @dataclass(frozen=True)
@@ -72,7 +74,7 @@ def target_eod_session_date(now: datetime | None = None) -> pd.Timestamp:
     if cal.weekday() >= 5:
         return (pd.Timestamp(cal) - pd.offsets.BDay(1)).normalize()
 
-    if now.time() < MARKET_CLOSE_IST:
+    if now.time() < EOD_ANALYZE_AFTER_IST:
         return (pd.Timestamp(cal) - pd.offsets.BDay(1)).normalize()
     return pd.Timestamp(cal).normalize()
 
@@ -115,9 +117,27 @@ def _last_snapshot_date(store: Any) -> date | None:
     return None
 
 
-def plan_eod_session(store: Any, now: datetime | None = None) -> EodSessionPlan:
+def append_skip_journal_once(store: Any, plan: "EodSessionPlan") -> None:
+    """Avoid duplicate skip rows when cron/UI retries the same session."""
+    if not plan.skip_message:
+        return
+    msg = plan.skip_message
+    sess = str(plan.session_date.date())
+    if hasattr(store, "list_journal"):
+        for row in store.list_journal(5):
+            if row.get("kind") == "skip" and sess in str(row.get("message", "")):
+                if msg[:40] in str(row.get("message", "")):
+                    return
+    store.append_journal(sess, None, "skip", msg)
+    store.commit()
+
+
+def plan_eod_session(
+    store: Any, now: datetime | None = None, *, force: bool = False
+) -> EodSessionPlan:
     """
     Decide which EOD bar to process and whether to skip (idempotent runs).
+    force=True bypasses the equity-snapshot skip (manual recovery).
     """
     now = now or now_ist()
     if now.tzinfo is None:
@@ -127,13 +147,19 @@ def plan_eod_session(store: Any, now: datetime | None = None) -> EodSessionPlan:
 
     session = target_eod_session_date(now)
     cal_today = now.date()
-    before_close = cal_today.weekday() < 5 and now.time() < MARKET_CLOSE_IST
+    before_close = cal_today.weekday() < 5 and now.time() < EOD_ANALYZE_AFTER_IST
     last = _last_snapshot_date(store)
+    ist_clock = now.strftime("%H:%M IST")
 
-    if last is not None and last == session.date():
+    if (
+        not force
+        and last is not None
+        and last == session.date()
+    ):
         msg = (
             f"EOD analysis already completed for {session.date()} "
-            f"(equity snapshot on file). Nothing to do."
+            f"(equity snapshot on file). Nothing to do. "
+            f"(now {ist_clock}; target session {session.date()})"
         )
         return EodSessionPlan(
             session_date=session,
@@ -145,9 +171,9 @@ def plan_eod_session(store: Any, now: datetime | None = None) -> EodSessionPlan:
 
     if before_close and last is not None and last >= session.date():
         msg = (
-            f"Let the market close (after {MARKET_CLOSE_IST.strftime('%H:%M')} IST). "
+            f"Let the market close (after {EOD_ANALYZE_AFTER_IST.strftime('%H:%M')} IST). "
             f"Today's candle is not available yet. "
-            f"Last EOD analysis: {last}."
+            f"Last EOD analysis: {last}. (now {ist_clock})"
         )
         return EodSessionPlan(
             session_date=session,
@@ -167,5 +193,9 @@ def format_session_banner(plan: EodSessionPlan) -> str:
     when = "before" if plan.before_market_close else "after"
     return (
         f"EOD session {plan.session_date.date()} (IST {when} "
-        f"{MARKET_CLOSE_IST.strftime('%H:%M')} close; calendar {plan.calendar_today})"
+        f"{EOD_ANALYZE_AFTER_IST.strftime('%H:%M')} EOD window; calendar {plan.calendar_today})"
     )
+
+
+# Back-compat alias used in comments elsewhere
+MARKET_CLOSE_IST = EOD_ANALYZE_AFTER_IST

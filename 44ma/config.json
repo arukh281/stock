@@ -3,7 +3,7 @@
   "universe_master_pool": 0,
   "universe_cache_dir": ".cache/universe",
   "universe_history_start": "2018-01-01",
-  "universe_fetch_sleep_sec": 0.2,
+  "universe_fetch_sleep_sec": 0.35,
   "sma_period": 44,
   "sma_rising_lookback": 7,
   "sma_monotone_days": 6,

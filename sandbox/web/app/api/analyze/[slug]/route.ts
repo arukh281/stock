@@ -9,15 +9,18 @@ const SLUG_TO_PATH: Record<string, string> = {
 };
 
 export async function POST(
-  _req: Request,
+  req: Request,
   { params }: { params: { slug: string } }
 ) {
   const path = SLUG_TO_PATH[params.slug];
   if (!path) {
     return NextResponse.json({ error: "Unknown algo" }, { status: 404 });
   }
+  const url = new URL(req.url);
+  const force = url.searchParams.get("force") === "true";
+  const apiPath = force ? `${path}?force=true` : path;
   try {
-    const data = await apiFetch(path, { method: "POST" });
+    const data = await apiFetch(apiPath, { method: "POST" });
     return NextResponse.json(data);
   } catch (e) {
     return NextResponse.json(

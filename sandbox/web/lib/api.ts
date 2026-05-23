@@ -18,6 +18,13 @@ export function formatApiError(status: number, detail: string): string {
   ) {
     return `API unavailable (HTTP ${status}). On Render free tier the API may be sleeping or crashed—open paper-sandbox-api → Logs, confirm /health works, then retry in ~30s.`;
   }
+  if (/too many requests|rate limit|429/i.test(trimmed)) {
+    return (
+      "Yahoo Finance or Supabase rate limit (429). Wait a few minutes, then use " +
+      "Analyze EOD again — cron runs algos sequentially with cooldown. " +
+      "Avoid Run all + manual analyze at the same time."
+    );
+  }
   if (trimmed.length > 280) {
     return `${trimmed.slice(0, 280)}…`;
   }

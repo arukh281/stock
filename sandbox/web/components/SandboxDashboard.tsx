@@ -68,7 +68,7 @@ export function SandboxDashboard() {
       </header>
 
       <div className="card-grid">
-        {ALGOS.map((a) => (
+        {ALGOS.map((a, i) => (
           <AlgoCard
             key={a.id}
             id={a.id}
@@ -77,6 +77,7 @@ export function SandboxDashboard() {
             batchLocked={batchLocked}
             batchRunningThis={batchCurrentId === a.id}
             refreshToken={refreshTokens[a.id] ?? 0}
+            loadDelayMs={i * 450}
           />
         ))}
       </div>

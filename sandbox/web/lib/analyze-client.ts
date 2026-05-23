@@ -5,8 +5,9 @@ export const ALGO_SLUGS: Record<string, string> = {
   kali: "kali",
 };
 
-export async function postAnalyze(slug: string) {
-  const res = await fetch(`/api/analyze/${slug}`, { method: "POST" });
+export async function postAnalyze(slug: string, force = false) {
+  const q = force ? "?force=true" : "";
+  const res = await fetch(`/api/analyze/${slug}${q}`, { method: "POST" });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Analyze failed");
   return data as { run_id?: string };
@@ -24,9 +25,9 @@ export async function waitForRun(runId: string) {
   }
 }
 
-export async function runEodAnalyze(algoId: string) {
+export async function runEodAnalyze(algoId: string, force = false) {
   const slug = ALGO_SLUGS[algoId] ?? algoId;
-  const data = await postAnalyze(slug);
+  const data = await postAnalyze(slug, force);
   if (data.run_id) {
     const run = await waitForRun(data.run_id);
     if (run.status === "error") {

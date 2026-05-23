@@ -11,8 +11,8 @@ name: EOD analyze
 
 on:
   schedule:
-    # 11:30 UTC Mon–Fri = 5:00 PM IST (after 3:30 PM close + Yahoo EOD settle)
-    - cron: "30 11 * * 1-5"
+    # 12:00 UTC Mon–Fri = 5:30 PM IST (Yahoo EOD settled; matches EOD_ANALYZE_AFTER_IST)
+    - cron: "0 12 * * 1-5"
   workflow_dispatch:
 
 jobs:

@@ -76,6 +76,7 @@ def run_daily_reconcile(
     *,
     skip_fundamentals: bool = False,
     force_screener: bool = False,
+    force: bool = False,
     lookback_days: int = 400,
 ) -> list[str]:
     build_action_plan, check_open_positions, load_universe_symbols, aggregate_market_regime = (
@@ -83,15 +84,11 @@ def run_daily_reconcile(
     )
 
     cfg = load_config()
-    plan = plan_eod_session(store)
+    from sandbox.market_session import append_skip_journal_once
+
+    plan = plan_eod_session(store, force=force)
     if plan.should_skip:
-        store.append_journal(
-            str(plan.session_date.date()),
-            None,
-            "skip",
-            plan.skip_message or "",
-        )
-        store.commit()
+        append_skip_journal_once(store, plan)
         return [plan.skip_message or ""]
 
     session = plan.session_date

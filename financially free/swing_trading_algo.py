@@ -245,24 +245,36 @@ class SwingTradingAlgo:
             return False
         return bool(row["VCP_Breakout"])
 
-    def prepare_universe(self, tickers, backtest_start, end_date):
+    def prepare_universe(
+        self, tickers, backtest_start, end_date, *, download_threads: bool = False
+    ):
         """
         Download and compute signals for many tickers (macro fetched once).
         Returns dict[ticker] -> OHLCV + signal columns (includes warmup rows).
+        download_threads=False avoids Yahoo 429 bursts on EOD cron / Render.
         """
         data_start = self._warmup_start(backtest_start)
         macro_roc = self.calculate_macro_roc(data_start, end_date)
 
         tickers = list(dict.fromkeys(tickers))
         print(f"Downloading {len(tickers)} stocks ({data_start} → {end_date})...", flush=True)
-        raw = yf.download(
-            tickers,
-            start=data_start,
-            end=end_date,
-            group_by="ticker",
-            progress=len(tickers) > 20,
-            threads=True,
-        )
+
+        def _download():
+            return yf.download(
+                tickers,
+                start=data_start,
+                end=end_date,
+                group_by="ticker",
+                progress=len(tickers) > 20,
+                threads=download_threads,
+            )
+
+        try:
+            from sandbox.yahoo_fetch import call_with_rate_limit_retry
+
+            raw = call_with_rate_limit_retry(_download, label="yf.download:midcap")
+        except ImportError:
+            raw = _download()
 
         universe = {}
         single = len(tickers) == 1

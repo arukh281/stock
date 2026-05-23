@@ -119,6 +119,7 @@ export function AlgoCard({
   batchLocked = false,
   batchRunningThis = false,
   refreshToken = 0,
+  loadDelayMs = 0,
 }: {
   id: string;
   label: string;
@@ -126,6 +127,8 @@ export function AlgoCard({
   batchLocked?: boolean;
   batchRunningThis?: boolean;
   refreshToken?: number;
+  /** Stagger initial portfolio fetch to avoid Supabase 429 on page load */
+  loadDelayMs?: number;
 }) {
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [loading, setLoading] = useState(true);
@@ -148,8 +151,11 @@ export function AlgoCard({
   }, [id]);
 
   useEffect(() => {
-    load();
-  }, [load, refreshToken]);
+    const t = window.setTimeout(() => {
+      load();
+    }, loadDelayMs);
+    return () => window.clearTimeout(t);
+  }, [load, refreshToken, loadDelayMs]);
 
   const onCancelPending = async (symbol: string) => {
     setCancelling(symbol);
@@ -177,12 +183,12 @@ export function AlgoCard({
   const isRunning =
     analyzing || batchRunningThis || lastRun?.status === "running";
 
-  async function onAnalyze() {
+  async function onAnalyze(force = false) {
     if (batchLocked) return;
     setAnalyzing(true);
     setError(null);
     try {
-      await runEodAnalyze(id);
+      await runEodAnalyze(id, force);
       await load();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Analyze failed");
@@ -255,16 +261,27 @@ export function AlgoCard({
 
         {runErr ? <p className="err-msg">{runErr}</p> : null}
 
-        <button
-          type="button"
-          className="btn btn-primary btn-block"
-          disabled={isRunning || loading || batchLocked}
-          onClick={onAnalyze}
-        >
-          {batchRunningThis || (analyzing && !batchLocked)
-            ? "Running EOD…"
-            : "Analyze EOD"}
-        </button>
+        <div className="btn-row">
+          <button
+            type="button"
+            className="btn btn-primary btn-block"
+            disabled={isRunning || loading || batchLocked}
+            onClick={() => onAnalyze(false)}
+          >
+            {batchRunningThis || (analyzing && !batchLocked)
+              ? "Running EOD…"
+              : "Analyze EOD"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            title="Re-run even if today's snapshot exists (recovery)"
+            disabled={isRunning || loading || batchLocked}
+            onClick={() => onAnalyze(true)}
+          >
+            Force
+          </button>
+        </div>
 
         <div className="card-sections">
           <section className="card-section">

@@ -24,6 +24,7 @@ WAKE_SLEEP_SEC="${WAKE_SLEEP_SEC:-10}"
 POST_MAX_ATTEMPTS="${POST_MAX_ATTEMPTS:-4}"
 POST_MAX_TIME="${POST_MAX_TIME:-180}"
 CURL_CONNECT_TIMEOUT="${CURL_CONNECT_TIMEOUT:-30}"
+INTER_ALGO_SLEEP_SEC="${INTER_ALGO_SLEEP_SEC:-60}"
 
 # slug|algo_id (DB /runs path)
 ALGOS=(
@@ -282,6 +283,10 @@ main() {
       failures=$(( failures + 1 ))
     fi
     maybe_keepalive
+    if [[ "${slug}" != "kali" ]]; then
+      echo "  cooling down ${INTER_ALGO_SLEEP_SEC}s before next algo (Yahoo rate limits)…"
+      sleep "${INTER_ALGO_SLEEP_SEC}"
+    fi
   done
 
   finalize_summary

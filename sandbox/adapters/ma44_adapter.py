@@ -5,7 +5,7 @@ from typing import Any
 
 from sandbox.adapters._paths import setup_paths
 from sandbox.ma44_variants import config_path_for, is_ma44_algo
-from sandbox.market_session import format_session_banner, plan_eod_session
+from sandbox.market_session import append_skip_journal_once, format_session_banner, plan_eod_session
 from sandbox.store.supabase_store import SupabaseLedgerStore
 
 
@@ -19,7 +19,7 @@ def _load_settings(algo_id: str):
     return Settings.load(path)
 
 
-def run_ma44_analyze(algo_id: str = "44ma") -> dict[str, Any]:
+def run_ma44_analyze(algo_id: str = "44ma", *, force: bool = False) -> dict[str, Any]:
     if not is_ma44_algo(algo_id):
         raise ValueError(f"Not a 44MA sandbox algo: {algo_id}")
 
@@ -29,15 +29,9 @@ def run_ma44_analyze(algo_id: str = "44ma") -> dict[str, Any]:
     settings = _load_settings(algo_id)
 
     store = SupabaseLedgerStore(algo_id)
-    plan = plan_eod_session(store)
+    plan = plan_eod_session(store, force=force)
     if plan.should_skip:
-        store.append_journal(
-            str(plan.session_date.date()),
-            None,
-            "skip",
-            plan.skip_message or "",
-        )
-        store.commit()
+        append_skip_journal_once(store, plan)
         store.close()
         return {
             "lines": [plan.skip_message or ""],

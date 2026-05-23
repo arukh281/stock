@@ -181,7 +181,13 @@ The web UI now shows a short error instead of raw HTML and retries once after ~2
 
 ### Free EOD cron (GitHub Actions)
 
-Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 11:30 UTC** (5:00 PM IST). Script `sandbox/scripts/eod-trigger-all.sh` wakes the API (`/health` retries), runs **one algo at a time**, polls `/runs/id/{run_id}` until each job finishes, and pings `/health` every 5 minutes during long runs so Render free tier does not spin down mid-analyze.
+Workflow: `.github/workflows/eod-analyze.yml` — runs **Mon–Fri 12:00 UTC** (5:30 PM IST). Script `sandbox/scripts/eod-trigger-all.sh` wakes the API (`/health` retries), runs **one algo at a time** with a **60s cooldown** between algos (Yahoo rate limits), polls `/runs/id/{run_id}` until each job finishes, and pings `/health` every 5 minutes during long runs so Render free tier does not spin down mid-analyze.
+
+**EOD window:** `sandbox/market_session.py` targets today's bar only after **17:30 IST** (aligned with cron). Runs before that target the prior session and may skip with “already completed for …” — that is expected, not a bug.
+
+**Manual recovery:** UI **Force** button or `POST /analyze/{slug}?force=true` re-runs even when an equity snapshot exists for the target session.
+
+**44ma slowness:** ~100 symbols × Yahoo fetch with ~0.35s sleep ≈ several minutes on Render free tier; rate-limit retries add more time. Avoid overlapping manual analyze with the cron.
 
 1. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
 2. Add:

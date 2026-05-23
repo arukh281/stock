@@ -606,15 +606,11 @@ def run_daily_paper(
     params = PRODUCTION_PARAMS.copy()
     algo = algo or SwingTradingAlgo(index_ticker="NIFTYMIDCAP150.NS", lookback_roc=20)
 
-    plan = plan_eod_session(store)
+    from sandbox.market_session import append_skip_journal_once
+
+    plan = plan_eod_session(store, force=skip_eod_gate)
     if not skip_eod_gate and session_date is None and plan.should_skip:
-        store.append_journal(
-            str(plan.session_date.date()),
-            None,
-            "skip",
-            plan.skip_message or "",
-        )
-        store.commit()
+        append_skip_journal_once(store, plan)
         return [plan.skip_message or ""]
 
     planned_session = (

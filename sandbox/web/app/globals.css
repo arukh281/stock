@@ -505,6 +505,16 @@ body {
   color: var(--text);
 }
 
+.btn-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.btn-row .btn-block {
+  flex: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;

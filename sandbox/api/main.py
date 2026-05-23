@@ -106,37 +106,49 @@ def _run_job(algo_id: str, fn: Callable[[], dict], run_id: str) -> None:
         )
 
 
-def _schedule_ma44_analyze(algo_id: str, background_tasks: BackgroundTasks) -> Dict[str, Any]:
+def _schedule_ma44_analyze(
+    algo_id: str, background_tasks: BackgroundTasks, *, force: bool = False
+) -> Dict[str, Any]:
     store = _guard_running(algo_id)
     run_id = store.start_run()
 
     def job():
         from sandbox.adapters.ma44_adapter import run_ma44_analyze
 
-        return run_ma44_analyze(algo_id)
+        return run_ma44_analyze(algo_id, force=force)
 
     background_tasks.add_task(_run_job, algo_id, job, run_id)
     return {"run_id": run_id, "algo_id": algo_id, "status": "running"}
 
 
 @app.post("/analyze/44ma", dependencies=[Depends(verify_api_key)])
-def analyze_44ma(background_tasks: BackgroundTasks) -> Dict[str, Any]:
-    return _schedule_ma44_analyze("44ma", background_tasks)
+def analyze_44ma(
+    background_tasks: BackgroundTasks,
+    force: bool = Query(False, description="Re-run even if today's EOD snapshot exists"),
+) -> Dict[str, Any]:
+    return _schedule_ma44_analyze("44ma", background_tasks, force=force)
 
 
 @app.post("/analyze/44ma-stacked-2ma", dependencies=[Depends(verify_api_key)])
-def analyze_44ma_stacked_2ma(background_tasks: BackgroundTasks) -> Dict[str, Any]:
-    return _schedule_ma44_analyze("44ma_stacked_2ma", background_tasks)
+def analyze_44ma_stacked_2ma(
+    background_tasks: BackgroundTasks,
+    force: bool = Query(False, description="Re-run even if today's EOD snapshot exists"),
+) -> Dict[str, Any]:
+    return _schedule_ma44_analyze("44ma_stacked_2ma", background_tasks, force=force)
 
 
 @app.post("/analyze/financially-free", dependencies=[Depends(verify_api_key)])
-def analyze_financially_free(background_tasks: BackgroundTasks) -> Dict[str, Any]:
+def analyze_financially_free(
+    background_tasks: BackgroundTasks,
+    force: bool = Query(False, description="Re-run even if today's EOD snapshot exists"),
+) -> Dict[str, Any]:
     store = _guard_running("financially_free")
     run_id = store.start_run()
+
     def job():
         from sandbox.adapters.financially_free_adapter import run_financially_free_analyze
 
-        return run_financially_free_analyze()
+        return run_financially_free_analyze(force=force)
 
     background_tasks.add_task(_run_job, "financially_free", job, run_id)
     return {"run_id": run_id, "algo_id": "financially_free", "status": "running"}
@@ -147,6 +159,7 @@ def analyze_kali(
     background_tasks: BackgroundTasks,
     skip_fundamentals: bool = Query(False),
     force_screener: bool = Query(False),
+    force: bool = Query(False, description="Re-run even if today's EOD snapshot exists"),
 ) -> Dict[str, Any]:
     store = _guard_running("kali")
     run_id = store.start_run()
@@ -157,6 +170,7 @@ def analyze_kali(
         return run_kali_analyze(
             skip_fundamentals=skip_fundamentals,
             force_screener=force_screener,
+            force=force,
         )
 
     background_tasks.add_task(_run_job, "kali", job, run_id)

@@ -8,6 +8,16 @@ from datetime import datetime
 import pandas as pd
 import yfinance as yf
 
+try:
+    from sandbox.yahoo_fetch import call_with_rate_limit_retry, is_rate_limit_error
+except ImportError:
+
+    def call_with_rate_limit_retry(fn, **_kw):  # type: ignore[misc]
+        return fn()
+
+    def is_rate_limit_error(exc=None, text=""):  # type: ignore[misc]
+        return "too many" in f"{exc or ''} {text}".lower()
+
 
 def _candidate_yahoo_symbols(symbol: str) -> list[str]:
     """
@@ -61,8 +71,22 @@ def fetch_daily(symbol: str, start: str | datetime, end: str | datetime | None =
     try:
         for sym in _candidate_yahoo_symbols(symbol):
             with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
-                t = yf.Ticker(sym)
-                df = t.history(start=start, end=end, interval="1d", auto_adjust=False, actions=False)
+                def _pull() -> pd.DataFrame:
+                    t = yf.Ticker(sym)
+                    return t.history(
+                        start=start,
+                        end=end,
+                        interval="1d",
+                        auto_adjust=False,
+                        actions=False,
+                    )
+
+                df = call_with_rate_limit_retry(_pull, label=f"yahoo:{sym}")
+            err_text = buf_err.getvalue()
+            if is_rate_limit_error(text=err_text):
+                raise RuntimeError(
+                    f"Yahoo rate limited fetching {sym}: {err_text.strip()[:240]}"
+                )
             norm = _normalize_history_df(df)
             if not norm.empty:
                 return norm
