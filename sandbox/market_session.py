@@ -117,19 +117,54 @@ def _last_snapshot_date(store: Any) -> date | None:
     return None
 
 
+def append_journal_once(
+    store: Any,
+    ts: str,
+    symbol: str | None,
+    kind: str,
+    message: str,
+    *,
+    recent_limit: int = 50,
+) -> bool:
+    """Append a journal row only when the same entry is not already present."""
+    if hasattr(store, "list_journal"):
+        target_symbol = symbol or None
+        for row in store.list_journal(recent_limit):
+            row_symbol = row.get("symbol") or None
+            if row.get("kind") != kind:
+                continue
+            if row_symbol != target_symbol:
+                continue
+            if str(row.get("message", "")) == message:
+                return False
+    store.append_journal(ts, symbol, kind, message)
+    return True
+
+
 def append_skip_journal_once(store: Any, plan: "EodSessionPlan") -> None:
     """Avoid duplicate skip rows when cron/UI retries the same session."""
     if not plan.skip_message:
         return
-    msg = plan.skip_message
-    sess = str(plan.session_date.date())
-    if hasattr(store, "list_journal"):
-        for row in store.list_journal(5):
-            if row.get("kind") == "skip" and sess in str(row.get("message", "")):
-                if msg[:40] in str(row.get("message", "")):
-                    return
-    store.append_journal(sess, None, "skip", msg)
-    store.commit()
+    if append_journal_once(
+        store,
+        str(plan.session_date.date()),
+        None,
+        "skip",
+        plan.skip_message,
+        recent_limit=10,
+    ):
+        store.commit()
+
+
+def append_analysis_journal_once(store: Any, plan: "EodSessionPlan", message: str) -> bool:
+    """Record informative analyze-session lines in the activity log once."""
+    return append_journal_once(
+        store,
+        str(plan.session_date.date()),
+        None,
+        "analysis",
+        message,
+    )
 
 
 def plan_eod_session(

@@ -1,0 +1,28 @@
+{
+  "name": "screnner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "xlsx-to-json": "node scripts/xlsx-to-json.mjs",
+    "screener:parse": "node scripts/parse-screener-export.mjs",
+    "screener:consolidate": "node scripts/consolidate-screener-exports.mjs",
+    "screener:strip-sheets": "node scripts/strip-xlsx-to-data-sheet.mjs",
+    "screener:features": "node scripts/extract-features.mjs",
+    "screener:llm-pack": "node scripts/llm-pack.mjs",
+    "screener:xlsx-to-features": "node scripts/xlsx-to-features.mjs",
+    "screener:post-process": "node scripts/post-process-export-dir.mjs",
+    "screener:finalize": "node scripts/export-ingest.mjs finalize",
+    "screener:retry-export": "node scripts/retry-missing-exports.mjs",
+    "test": "playwright test",
+    "screener": "playwright test tests/screener-query.spec.ts",
+    "screener:list": "playwright test tests/screener-query.spec.ts",
+    "screener:export": "playwright test tests/screener-query.spec.ts",
+    "screener:cli": "bash scripts/screener.sh",
+    "auth:save": "playwright codegen https://www.screener.in/login/ --save-storage=playwright/.auth/user.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "dotenv": "^16.4.5",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -606,7 +606,7 @@ def run_daily_paper(
     params = PRODUCTION_PARAMS.copy()
     algo = algo or SwingTradingAlgo(index_ticker="NIFTYMIDCAP150.NS", lookback_roc=20)
 
-    from sandbox.market_session import append_skip_journal_once
+    from sandbox.market_session import append_analysis_journal_once, append_skip_journal_once
 
     plan = plan_eod_session(store, force=skip_eod_gate)
     if not skip_eod_gate and session_date is None and plan.should_skip:
@@ -641,12 +641,16 @@ def run_daily_paper(
     session_date = resolve_session_from_universe(planned_session, universe)
     universe = clip_universe(universe, session_date)
 
-    lines: list[str] = [format_session_banner(plan)]
+    banner = format_session_banner(plan)
+    lines: list[str] = [banner]
+    analysis_messages: list[str] = [banner]
     if normalize_timestamp(planned_session) != session_date:
-        lines.append(
+        fallback_msg = (
             f"Using last available bar {session_date.date()} "
             f"(requested {planned_session.date()})."
         )
+        lines.append(fallback_msg)
+        analysis_messages.append(fallback_msg)
     _, get_constituents_fn, _ = _universe_helpers(UNIVERSE_MIDCAP150)
 
     # Drop pendings sized below 1 share (legacy fractional qty on high-priced names).
@@ -667,10 +671,12 @@ def run_daily_paper(
 
     fresh_ledger = _last_eod_snapshot_date(store) is None
     if fresh_ledger:
-        lines.append(
+        fresh_msg = (
             "Fresh ledger: only scanning signals on the current EOD session bar "
             "(no historical catch-up)."
         )
+        lines.append(fresh_msg)
+        analysis_messages.append(fresh_msg)
 
     # 1) Prior-bar signals only when continuing an existing EOD history.
     prev_candidates: list[tuple[str, float, pd.Timestamp]] = []
@@ -754,5 +760,7 @@ def run_daily_paper(
     store.set_cash(state.cash)
     store.set_portfolio_equity(equity)
     store.insert_equity_snapshot(session_date.date(), state.cash, equity)
+    for message in analysis_messages:
+        append_analysis_journal_once(store, plan, message)
     store.commit()
     return lines

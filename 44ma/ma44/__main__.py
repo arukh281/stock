@@ -270,7 +270,7 @@ def cmd_universe(args: argparse.Namespace) -> int:
     settings = _load_settings(args.config)
     n = int(args.top or getattr(settings, "universe_top_n", 100) or 100)
     syms = top_symbols_by_live_ffmc(settings, n=n)
-    print(f"top_{n}_by_nse_ffmc ({len(syms)} names, cached per calendar day):")
+    print(f"top_{n}_by_live_mcap_proxy ({len(syms)} names, cached per calendar day):")
     for i, sym in enumerate(syms, 1):
         print(f"  {i:3d}. {sym}")
     return 0

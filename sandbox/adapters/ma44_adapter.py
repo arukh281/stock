@@ -5,7 +5,12 @@ from typing import Any
 
 from sandbox.adapters._paths import setup_paths
 from sandbox.ma44_variants import config_path_for, is_ma44_algo
-from sandbox.market_session import append_skip_journal_once, format_session_banner, plan_eod_session
+from sandbox.market_session import (
+    append_analysis_journal_once,
+    append_skip_journal_once,
+    format_session_banner,
+    plan_eod_session,
+)
 from sandbox.store.supabase_store import SupabaseLedgerStore
 
 
@@ -50,6 +55,7 @@ def run_ma44_analyze(algo_id: str = "44ma", *, force: bool = False) -> dict[str,
             float(ctx["data"]["cash"]),
             equity,
         )
+        append_analysis_journal_once(store, plan, format_session_banner(plan))
         store.commit()
     finally:
         store.close()

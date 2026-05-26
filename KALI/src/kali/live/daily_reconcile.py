@@ -84,7 +84,7 @@ def run_daily_reconcile(
     )
 
     cfg = load_config()
-    from sandbox.market_session import append_skip_journal_once
+    from sandbox.market_session import append_analysis_journal_once, append_skip_journal_once
 
     plan = plan_eod_session(store, force=force)
     if plan.should_skip:
@@ -104,7 +104,9 @@ def run_daily_reconcile(
         portfolio_equity = float(store.load_portfolio_summary().get("equity", store.get_cash()))
 
     candidate_symbols = load_universe_symbols(None, cfg)
-    lines: list[str] = [format_session_banner(plan)]
+    banner = format_session_banner(plan)
+    lines: list[str] = [banner]
+    analysis_messages: list[str] = [banner]
 
     if skip_fundamentals:
         symbols = candidate_symbols
@@ -146,10 +148,12 @@ def run_daily_reconcile(
     data_last = normalize_timestamp(signal_date)
     signal_date = session
     if data_last != session:
-        lines.append(
+        cache_msg = (
             f"Using EOD session {session.date()} for signals "
             f"(feature cache last bar {data_last.date()})."
         )
+        lines.append(cache_msg)
+        analysis_messages.append(cache_msg)
 
     pos_df = _positions_df(store)
     if not pos_df.empty:
@@ -233,11 +237,16 @@ def run_daily_reconcile(
         else:
             row = df.iloc[-1]
         regimes.append(str(row.get("regime_active", "UNKNOWN")))
-    lines.append(
-        f"KALI {signal_date.date()} | {aggregate_market_regime(regimes)} | plan rows {len(action_plan) if action_plan is not None else 0}",
+    summary = (
+        f"KALI {signal_date.date()} | {aggregate_market_regime(regimes)} | "
+        f"plan rows {len(action_plan) if action_plan is not None else 0}"
     )
+    lines.append(summary)
+    analysis_messages.append(summary)
 
     store.insert_equity_snapshot(session.date(), store.get_cash(), portfolio_equity)
     store.set_portfolio_equity(portfolio_equity)
+    for message in analysis_messages:
+        append_analysis_journal_once(store, plan, message)
     store.commit()
     return lines
