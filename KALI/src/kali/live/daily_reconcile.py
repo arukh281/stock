@@ -34,6 +34,7 @@ except ImportError:
 
 FILL_BUY = "eod_amo_pending_next_open"
 FILL_EXIT = "exit_signal_close_fill_next_open"
+PAPER_FRICTION = 0.001
 
 
 def _import_signal_helpers():
@@ -69,6 +70,190 @@ def _positions_df(store: Any) -> pd.DataFrame:
             }
         )
     return pd.DataFrame(rows)
+
+
+def _symbol_key(symbol: str) -> str:
+    return str(symbol).upper().replace(".NS", "")
+
+
+def _feature_history_for_symbol(
+    feature_map: dict[str, pd.DataFrame], symbol: str
+) -> pd.DataFrame | None:
+    key = _symbol_key(symbol)
+    for candidate in (str(symbol), str(symbol).upper(), key):
+        df = feature_map.get(candidate)
+        if df is not None:
+            return df
+    return None
+
+
+def _find_position(store: Any, symbol: str) -> Any | None:
+    key = _symbol_key(symbol)
+    for pos in store.list_positions():
+        if _symbol_key(pos.symbol) == key:
+            return pos
+    return None
+
+
+def _find_open_pending(store: Any, symbol: str) -> Any | None:
+    key = _symbol_key(symbol)
+    for pend in store.list_open_pending():
+        if _symbol_key(pend.symbol) == key:
+            return pend
+    return None
+
+
+def _derive_entry_atr(
+    entry_px: float, stop_px: float | None, target_px: float | None, cfg: dict[str, Any]
+) -> float:
+    sig_cfg = cfg.get("signals", {})
+    target_mult = float(sig_cfg.get("atr_target_mult", 0) or 0)
+    if target_px is not None and target_px > entry_px and target_mult > 0:
+        return float((target_px - entry_px) / target_mult)
+
+    stop_mult = float(sig_cfg.get("atr_stop_mult", 0) or 0)
+    if stop_px is not None and entry_px > stop_px and stop_mult > 0:
+        return float((entry_px - stop_px) / stop_mult)
+
+    return 0.0
+
+
+def _process_open_pendings(
+    store: Any,
+    feature_map: dict[str, pd.DataFrame],
+    session: pd.Timestamp,
+    cfg: dict[str, Any],
+) -> list[str]:
+    """Execute KALI next-open buy/exit pendings against the current session open."""
+    lines: list[str] = []
+    cash = float(store.get_cash())
+    cash_changed = False
+
+    for pend in store.list_open_pending():
+        fill_model = str(pend.fill_model or "")
+        if fill_model not in {FILL_BUY, FILL_EXIT} or pend.id is None:
+            continue
+
+        sym = str(pend.symbol).upper()
+        signal_day = normalize_timestamp(pend.signal_ts) if pend.signal_ts else None
+        deadline = normalize_timestamp(pend.deadline_ts) if pend.deadline_ts else None
+        if signal_day is not None and session <= signal_day:
+            continue
+        if deadline is not None and session > deadline:
+            store.update_pending_status(int(pend.id), "expired")
+            msg = f"{sym}: pending EXPIRED before next-open fill"
+            lines.append(msg)
+            store.append_journal(str(session.date()), sym, "expire", msg)
+            continue
+
+        df = _feature_history_for_symbol(feature_map, sym)
+        if df is None or session not in df.index:
+            continue
+
+        open_px = float(df.loc[session, "open"])
+        if pd.isna(open_px) or open_px <= 0:
+            continue
+
+        qty = int(float(pend.qty or 0))
+        if qty < 1:
+            store.update_pending_status(int(pend.id), "cancelled")
+            msg = f"{sym}: pending CANCELLED (invalid quantity)"
+            lines.append(msg)
+            store.append_journal(str(session.date()), sym, "cancel", msg)
+            continue
+
+        if fill_model == FILL_EXIT:
+            pos = _find_position(store, sym)
+            if pos is None:
+                store.update_pending_status(int(pend.id), "cancelled")
+                msg = f"{sym}: exit pending CANCELLED (position already closed)"
+                lines.append(msg)
+                store.append_journal(str(session.date()), sym, "cancel", msg)
+                continue
+
+            proceeds = float(pos.qty) * open_px * (1 - PAPER_FRICTION)
+            cash += proceeds
+            cash_changed = True
+            store.delete_position(pos.symbol)
+            store.fill_pending_at_open(int(pend.id), open_px, str(session.date()), fill_model)
+            entry_date = pd.Timestamp(
+                pos.extra.get("entry_date") or str(pos.opened_at)[:10]
+            ).date()
+            return_pct = (
+                round((open_px / float(pos.entry_px) - 1) * 100, 2)
+                if float(pos.entry_px) > 0
+                else 0.0
+            )
+            store.insert_closed_trade(
+                pos.symbol,
+                float(pos.qty),
+                entry_date,
+                session.date(),
+                float(pos.entry_px),
+                open_px,
+                return_pct,
+                "trailing_stop",
+                fill_model,
+                extra={"pending_id": int(pend.id), "stop_px": float(pend.stop_px or 0)},
+            )
+            msg = f"{pos.symbol}: EXIT filled @ {open_px:.2f} qty {int(float(pos.qty))}"
+            lines.append(msg)
+            store.append_journal(str(session.date()), pos.symbol, "exit", msg)
+            continue
+
+        cost = qty * open_px * (1 + PAPER_FRICTION)
+        if cash < cost:
+            store.update_pending_status(int(pend.id), "cancelled")
+            msg = f"{sym}: BUY pending CANCELLED (insufficient cash at open {open_px:.2f})"
+            lines.append(msg)
+            store.append_journal(str(session.date()), sym, "cancel", msg)
+            continue
+
+        cash -= cost
+        cash_changed = True
+        stop_px = float(pend.stop_px or 0)
+        target_px = float(pend.target_px or 0)
+        entry_atr = _derive_entry_atr(
+            open_px,
+            stop_px if stop_px > 0 else None,
+            target_px if target_px > 0 else None,
+            cfg,
+        )
+        store.fill_pending_at_open(int(pend.id), open_px, str(session.date()), fill_model)
+        store.insert_position(
+            sym,
+            float(qty),
+            open_px,
+            stop_px,
+            target_px,
+            str(session),
+            extra={
+                "entry_date": str(session.date()),
+                "entry_atr": entry_atr,
+                "initial_stop": stop_px,
+                "highest_high_since_entry": open_px,
+                "fill_model": fill_model,
+            },
+        )
+        msg = f"{sym}: BUY filled @ {open_px:.2f} qty {qty}"
+        lines.append(msg)
+        store.append_journal(str(session.date()), sym, "entry", msg)
+
+    if cash_changed:
+        store.set_cash(cash)
+    return lines
+
+
+def _portfolio_equity_for_session(
+    store: Any, feature_map: dict[str, pd.DataFrame], session: pd.Timestamp
+) -> float:
+    total = float(store.get_cash())
+    for pos in store.list_positions():
+        df = _feature_history_for_symbol(feature_map, pos.symbol)
+        if df is None or session not in df.index:
+            continue
+        total += float(pos.qty) * float(df.loc[session, "close"])
+    return total
 
 
 def run_daily_reconcile(
@@ -155,6 +340,8 @@ def run_daily_reconcile(
         lines.append(cache_msg)
         analysis_messages.append(cache_msg)
 
+    lines.extend(_process_open_pendings(store, feature_map, session, cfg))
+
     pos_df = _positions_df(store)
     if not pos_df.empty:
         import tempfile
@@ -186,6 +373,8 @@ def run_daily_reconcile(
                     pos = p
                     break
             if pos is None:
+                continue
+            if _find_open_pending(store, sym) is not None:
                 continue
             store.insert_pending(
                 sym,
@@ -244,6 +433,7 @@ def run_daily_reconcile(
     lines.append(summary)
     analysis_messages.append(summary)
 
+    portfolio_equity = _portfolio_equity_for_session(store, feature_map, session)
     store.insert_equity_snapshot(session.date(), store.get_cash(), portfolio_equity)
     store.set_portfolio_equity(portfolio_equity)
     for message in analysis_messages:
